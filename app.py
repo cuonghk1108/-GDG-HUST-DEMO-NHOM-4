@@ -34,8 +34,11 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.io as pio
 from plotly.subplots import make_subplots
 import streamlit as st
+
+pio.templates.default = "plotly_white"
 
 # Scikit-learn
 from sklearn.base import BaseEstimator, RegressorMixin, clone
@@ -812,90 +815,106 @@ def train_and_benchmark_models(
 # ==================================================================================================
 
 def inject_custom_css():
-    """Nhúng Modern Tech Analytics CSS với tone màu chuyên nghiệp và hiệu ứng viền kính Glassmorphism."""
+    """Nhúng Pure White Modern Tech CSS - Giao diện nền trắng tinh tế, sắc nét chuẩn SaaS."""
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-    html, body, [class*="css"] {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* Global Pure White Theme */
+    html, body, [class*="css"], .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        background-color: #FFFFFF !important;
+        color: #0F172A !important;
+    }
+
+    /* Sidebar Pure White */
+    [data-testid="stSidebar"], [data-testid="stSidebar"] > div:first-child {
+        background-color: #FFFFFF !important;
+        border-right: 1px solid #E2E8F0 !important;
+    }
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
+    [data-testid="stSidebar"] span, [data-testid="stSidebar"] label {
+        color: #1E293B !important;
     }
 
     /* Container Spacing */
     .block-container {
-        padding-top: 2rem !important;
+        padding-top: 1.8rem !important;
         padding-bottom: 3rem !important;
         max-width: 95% !important;
+        background-color: #FFFFFF !important;
     }
 
-    /* Modern Streamlit Tabs */
+    /* Modern Streamlit Tabs - Pure White */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
-        background-color: #F8FAFC;
+        background-color: #FFFFFF !important;
         padding: 6px;
         border-radius: 12px;
-        border: 1px solid #E2E8F0;
-        margin-bottom: 18px;
+        border: 1px solid #E2E8F0 !important;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     }
     .stTabs [data-baseweb="tab"] {
-        height: 46px;
+        height: 44px;
         white-space: pre-wrap;
-        background-color: transparent;
+        background-color: #FFFFFF !important;
         border-radius: 8px;
-        color: #475569;
+        color: #475569 !important;
         font-weight: 600;
-        font-size: 14px;
+        font-size: 13.5px;
         padding: 8px 18px;
-        border: none !important;
+        border: 1px solid transparent !important;
         transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .stTabs [data-baseweb="tab"]:hover {
-        background-color: #E2E8F0;
-        color: #0284C7;
+        background-color: #F8FAFC !important;
+        color: #0284C7 !important;
+        border-color: #E2E8F0 !important;
     }
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%) !important;
-        color: #FFFFFF !important;
-        box-shadow: 0 4px 12px rgba(2, 132, 199, 0.28) !important;
+        background-color: #FFFFFF !important;
+        color: #0284C7 !important;
+        border: 2px solid #0284C7 !important;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 12px rgba(2, 132, 199, 0.12) !important;
     }
 
-    /* Header Banner */
+    /* Header Banner - Pure White Card */
     .main-header {
-        background: linear-gradient(135deg, #0B132B 0%, #1C2541 45%, #0284C7 100%);
+        background: #FFFFFF !important;
         padding: 26px 32px;
         border-radius: 16px;
-        color: white;
+        color: #0F172A !important;
         margin-bottom: 22px;
-        box-shadow: 0 10px 25px -5px rgba(11, 19, 43, 0.3), 0 8px 10px -6px rgba(11, 19, 43, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.02) !important;
+        border: 1px solid #E2E8F0 !important;
         position: relative;
         overflow: hidden;
     }
-    .main-header::after {
+    .main-header::before {
         content: "";
         position: absolute;
-        top: -50%; right: -20%;
-        width: 350px; height: 350px;
-        background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-        border-radius: 50%;
-        pointer-events: none;
+        top: 0; left: 0; right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #0284C7, #38BDF8, #10B981);
     }
 
-    /* Metric Card */
+    /* Metric Card - Pure White */
     .metric-card {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
+        background: #FFFFFF !important;
+        border: 1px solid #E2E8F0 !important;
         border-radius: 14px;
         padding: 18px 20px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
         transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         position: relative;
         overflow: hidden;
     }
     .metric-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
-        border-color: #38BDF8;
+        box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.03) !important;
+        border-color: #38BDF8 !important;
     }
     .metric-card::before {
         content: "";
@@ -908,30 +927,31 @@ def inject_custom_css():
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
+        width: 34px;
+        height: 34px;
         border-radius: 8px;
-        background: #F0F9FF;
+        background: #F8FAFC !important;
+        border: 1px solid #E2E8F0 !important;
         color: #0284C7;
         font-size: 16px;
         margin-bottom: 6px;
     }
     .metric-title {
-        color: #64748B;
+        color: #64748B !important;
         font-size: 0.78rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.06em;
     }
     .metric-value {
-        color: #0F172A;
+        color: #0F172A !important;
         font-size: 1.65rem;
         font-weight: 800;
         margin-top: 4px;
         line-height: 1.2;
     }
     .metric-sub {
-        color: #0284C7;
+        color: #0284C7 !important;
         font-size: 0.8rem;
         font-weight: 600;
         margin-top: 4px;
@@ -946,30 +966,34 @@ def inject_custom_css():
         font-weight: 700;
         margin-right: 6px;
     }
-    .badge-tree { background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; }
-    .badge-forest { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
-    .badge-boosting { background: #E0E7FF; color: #3730A3; border: 1px solid #A5B4FC; }
-    .badge-nontree { background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; }
+    .badge-tree { background: #FFFFFF; color: #92400E; border: 1px solid #FCD34D; }
+    .badge-forest { background: #FFFFFF; color: #166534; border: 1px solid #86EFAC; }
+    .badge-boosting { background: #FFFFFF; color: #3730A3; border: 1px solid #A5B4FC; }
+    .badge-nontree { background: #FFFFFF; color: #475569; border: 1px solid #CBD5E1; }
 
-    /* Formula & Callout Boxes */
+    /* Formula & Callout Boxes - Pure White */
     .formula-box {
-        background: #F8FAFC;
-        border-left: 4px solid #0284C7;
+        background: #FFFFFF !important;
+        border: 1px solid #E2E8F0 !important;
+        border-left: 4px solid #0284C7 !important;
         padding: 14px 18px;
-        border-radius: 0 10px 10px 0;
+        border-radius: 8px;
         margin: 12px 0;
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.88rem;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        color: #0F172A !important;
     }
     .callout-box {
-        background: #F0FDF4;
-        border: 1px solid #BBF7D0;
-        border-left: 4px solid #10B981;
+        background: #FFFFFF !important;
+        border: 1px solid #E2E8F0 !important;
+        border-left: 4px solid #10B981 !important;
         padding: 14px 18px;
-        border-radius: 0 10px 10px 0;
+        border-radius: 8px;
         margin: 12px 0;
         font-size: 0.9rem;
+        color: #0F172A !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
 
     /* Live Pulse Status */
@@ -993,6 +1017,16 @@ def inject_custom_css():
         border-radius: 10px !important;
         overflow: hidden !important;
         font-size: 13px !important;
+        background-color: #FFFFFF !important;
+        border: 1px solid #E2E8F0 !important;
+    }
+
+    /* Form & Input controls */
+    div[data-baseweb="select"] > div,
+    input, textarea {
+        background-color: #FFFFFF !important;
+        border-color: #CBD5E1 !important;
+        color: #0F172A !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -1001,11 +1035,11 @@ def inject_custom_css():
 def render_project_footer(section_name: str = ""):
     """
     Footer chuẩn hóa của đề tài nghiên cứu khoa học C1 - Nhóm 4 (GDG on Campus HUST - Gen 6).
-    Chèn đồng bộ vào cuối mỗi Tab và từng phân hệ chức năng.
+    Chèn đồng bộ vào cuối mỗi Tab và từng phân hệ chức năng (Pure White Aesthetic).
     """
     sec_tag = f" — Phần: {section_name}" if section_name else ""
     st.markdown(f"""
-    <div style="margin-top: 36px; padding: 22px 24px; background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%); border-radius: 14px; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+    <div style="margin-top: 36px; padding: 22px 24px; background: #FFFFFF; border-radius: 14px; border: 1px solid #E2E8F0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; border-bottom: 1px solid #E2E8F0; padding-bottom: 12px; margin-bottom: 14px;">
             <div>
                 <span style="font-weight: 800; font-size: 15px; color: #0F172A;">🚀 ĐỀ TÀI C1: DECISION TREE VÀ ENSEMBLE TRÊN DỮ LIỆU BẢNG</span>
@@ -1016,19 +1050,19 @@ def render_project_footer(section_name: str = ""):
             </div>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; font-size: 13px; color: #334155;">
-            <div style="background: white; padding: 10px 14px; border-radius: 8px; border-left: 3px solid #0284C7;">
+            <div style="background: #FFFFFF; padding: 12px 14px; border-radius: 8px; border: 1px solid #E2E8F0; border-left: 3px solid #0284C7; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
                 <b>1. Phan Hoàng Long</b> <span style="color: #64748B;">(Team Lead)</span><br>
                 <small style="color: #64748B;">Nghiên cứu & Hiện thực hóa Decision Tree from Scratch</small>
             </div>
-            <div style="background: white; padding: 10px 14px; border-radius: 8px; border-left: 3px solid #10B981;">
+            <div style="background: #FFFFFF; padding: 12px 14px; border-radius: 8px; border: 1px solid #E2E8F0; border-left: 3px solid #10B981; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
                 <b>2. Võ Thảo Nguyên</b><br>
                 <small style="color: #64748B;">Tiền xử lý dữ liệu, Bagging/RF, AdaBoost/GBM, Giải thích SHAP</small>
             </div>
-            <div style="background: white; padding: 10px 14px; border-radius: 8px; border-left: 3px solid #F59E0B;">
+            <div style="background: #FFFFFF; padding: 12px 14px; border-radius: 8px; border: 1px solid #E2E8F0; border-left: 3px solid #F59E0B; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
                 <b>3. Võ Xuân Cường</b><br>
                 <small style="color: #64748B;">Hệ GBDT hiện đại (XGB/LGBM/CatBoost), Stress-Test & Web Demo</small>
             </div>
-            <div style="background: white; padding: 10px 14px; border-radius: 8px; border-left: 3px solid #8B5CF6;">
+            <div style="background: #FFFFFF; padding: 12px 14px; border-radius: 8px; border: 1px solid #E2E8F0; border-left: 3px solid #8B5CF6; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
                 <b>4. Trần Đại Nghĩa</b><br>
                 <small style="color: #64748B;">Cơ sở lý thuyết toán học, Đối chứng Non-Tree & Tổng hợp Báo cáo</small>
             </div>
@@ -1135,24 +1169,24 @@ def main():
     st.markdown("""
     <div class="main-header">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 8px; gap: 8px;">
-            <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: #38BDF8; text-transform: uppercase;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: #0284C7; text-transform: uppercase;">
                 🚀 GOOGLE DEVELOPER GROUP ON CAMPUS HUST — DATA & AI GEN 6
             </span>
-            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; color: #6EE7B7;">
-                <span class="status-pulse"></span> HỆ THỐNG THỰC NGHIỆM ĐANG CHẠY
+            <span style="display: inline-flex; align-items: center; gap: 6px; background: #ECFDF5; border: 1px solid #A7F3D0; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; color: #065F46;">
+                <span class="status-pulse"></span> HỆ THỐNG THỰC NGHIỆM SẴN SÀNG
             </span>
         </div>
-        <div style="font-size: 27px; font-weight: 800; line-height: 1.25; margin-bottom: 10px; letter-spacing: -0.01em;">
+        <div style="font-size: 26px; font-weight: 800; line-height: 1.3; margin-bottom: 10px; letter-spacing: -0.01em; color: #0F172A;">
             C1. DECISION TREE VÀ ENSEMBLE: CƠ SỞ LÝ THUYẾT, THỰC NGHIỆM ĐỐI CHỨNG VÀ GIẢI THÍCH MÔ HÌNH TRÊN DỮ LIỆU BẢNG
         </div>
-        <div style="font-size: 14.5px; opacity: 0.92; max-width: 980px; line-height: 1.5; margin-bottom: 14px;">
+        <div style="font-size: 14px; color: #475569; max-width: 980px; line-height: 1.55; margin-bottom: 14px;">
             Nghiên cứu độc lập & thực nghiệm toàn diện trên 989 tin đăng thuê phòng trọ TP.HCM — Triệt tiêu rò rỉ dữ liệu (Anti-Leakage), giải phẫu CART Regression từ đầu và kiểm định ứng suất 4 chiều.
         </div>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <span style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); padding: 4px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;">📊 989 Tin đăng TP.HCM</span>
-            <span style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); padding: 4px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;">⚖️ 12 Mô hình Đối chứng</span>
-            <span style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); padding: 4px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;">🔄 5-Fold Cross Validation</span>
-            <span style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); padding: 4px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;">🛡️ Zero-Leakage Guaranteed</span>
+            <span style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; color: #334155; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">📊 989 Tin đăng TP.HCM</span>
+            <span style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; color: #334155; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">⚖️ 12 Mô hình Đối chứng</span>
+            <span style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; color: #334155; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">🔄 5-Fold Cross Validation</span>
+            <span style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; color: #334155; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">🛡️ Zero-Leakage Guaranteed</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
