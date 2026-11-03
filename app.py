@@ -38,7 +38,37 @@ import plotly.io as pio
 from plotly.subplots import make_subplots
 import streamlit as st
 
+# Cấu hình Pure White Theme chuẩn cho toàn bộ biểu đồ Plotly
 pio.templates.default = "plotly_white"
+if "plotly_white" in pio.templates:
+    pio.templates["plotly_white"].layout.update(
+        paper_bgcolor="#FFFFFF",
+        plot_bgcolor="#FFFFFF",
+        font=dict(family="Inter, -apple-system, sans-serif", color="#0F172A", size=12),
+        xaxis=dict(
+            showgrid=True,
+            gridcolor="#F1F5F9",
+            zerolinecolor="#E2E8F0",
+            linecolor="#CBD5E1",
+            tickfont=dict(color="#475569", size=11),
+            title=dict(font=dict(color="#0F172A", size=12, family="Inter, sans-serif"))
+        ),
+        yaxis=dict(
+            showgrid=True,
+            gridcolor="#F1F5F9",
+            zerolinecolor="#E2E8F0",
+            linecolor="#CBD5E1",
+            tickfont=dict(color="#475569", size=11),
+            title=dict(font=dict(color="#0F172A", size=12, family="Inter, sans-serif"))
+        ),
+        legend=dict(
+            bgcolor="rgba(255, 255, 255, 0.95)",
+            bordercolor="#E2E8F0",
+            borderwidth=1,
+            font=dict(color="#334155", size=11)
+        ),
+        margin=dict(l=24, r=24, t=44, b=24)
+    )
 
 # Scikit-learn
 from sklearn.base import BaseEstimator, RegressorMixin, clone
@@ -815,15 +845,56 @@ def train_and_benchmark_models(
 # ==================================================================================================
 
 def inject_custom_css():
-    """Nhúng Pure White Modern Tech CSS - Giao diện nền trắng tinh tế, sắc nét chuẩn SaaS."""
+    """Nhúng Pure White Modern Tech CSS - Giao diện nền trắng tinh tế, sắc nét chuẩn SaaS, tối ưu hóa typography và biểu bảng."""
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-    /* Global Pure White Theme */
+    /* Global Pure White Theme & Typography */
     html, body, [class*="css"], .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11' !important;
         background-color: #FFFFFF !important;
+        color: #0F172A !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Headings Typography */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Inter', sans-serif !important;
+        color: #0F172A !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.02em !important;
+    }
+    h1 { font-size: 2.15rem !important; line-height: 1.25 !important; }
+    h2 { font-size: 1.65rem !important; line-height: 1.3 !important; margin-top: 1.2rem !important; margin-bottom: 0.8rem !important; }
+    h3 { font-size: 1.35rem !important; line-height: 1.35 !important; margin-top: 1.1rem !important; margin-bottom: 0.6rem !important; }
+    h4 { font-size: 1.15rem !important; line-height: 1.4 !important; margin-top: 0.9rem !important; }
+
+    /* Paragraphs & Text Content */
+    p, li, span {
+        color: #334155 !important;
+        font-size: 14.5px !important;
+        line-height: 1.65 !important;
+    }
+    label {
+        color: #1E293B !important;
+        font-weight: 600 !important;
+        font-size: 13.5px !important;
+    }
+
+    /* LaTeX Math Formula Highlighting */
+    .katex-display {
+        background: #FFFFFF !important;
+        padding: 14px 18px !important;
+        border-radius: 10px !important;
+        border: 1px solid #E2E8F0 !important;
+        margin: 14px 0 !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02) !important;
+    }
+    .katex {
+        font-size: 1.08em !important;
         color: #0F172A !important;
     }
 
@@ -1012,13 +1083,62 @@ def inject_custom_css():
         100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
     }
 
-    /* Table Improvements */
-    .dataframe {
-        border-radius: 10px !important;
-        overflow: hidden !important;
-        font-size: 13px !important;
+    /* Streamlit Alert Callouts in Pure White */
+    .stAlert {
         background-color: #FFFFFF !important;
         border: 1px solid #E2E8F0 !important;
+        border-radius: 12px !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+    }
+    .stAlert p {
+        color: #1E293B !important;
+    }
+
+    /* Tables & Dataframes - Crystal Clear Pure White Styling */
+    [data-testid="stDataFrame"] {
+        border: 1px solid #E2E8F0 !important;
+        border-radius: 12px !important;
+        background-color: #FFFFFF !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+        overflow: hidden !important;
+        padding: 2px !important;
+    }
+    [data-testid="stDataFrame"] > div {
+        background-color: #FFFFFF !important;
+    }
+    table, table.dataframe {
+        width: 100% !important;
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+        margin: 14px 0 !important;
+        border: 1px solid #E2E8F0 !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
+        background-color: #FFFFFF !important;
+        font-family: 'Inter', sans-serif !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02) !important;
+    }
+    th {
+        background-color: #F8FAFC !important;
+        color: #0F172A !important;
+        font-weight: 700 !important;
+        font-size: 13.5px !important;
+        padding: 12px 14px !important;
+        border-bottom: 2px solid #E2E8F0 !important;
+        text-align: left !important;
+    }
+    td {
+        background-color: #FFFFFF !important;
+        color: #1E293B !important;
+        font-size: 13.5px !important;
+        padding: 11px 14px !important;
+        border-bottom: 1px solid #F1F5F9 !important;
+    }
+    tr:last-child td {
+        border-bottom: none !important;
+    }
+    tr:hover td {
+        background-color: #F8FAFC !important;
     }
 
     /* Form & Input controls */
@@ -1027,6 +1147,7 @@ def inject_custom_css():
         background-color: #FFFFFF !important;
         border-color: #CBD5E1 !important;
         color: #0F172A !important;
+        font-family: 'Inter', sans-serif !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -1535,8 +1656,18 @@ def main():
         medals = ["🥇 #1", "🥈 #2", "🥉 #3"] + [f"#{i}" for i in range(4, len(display_leaderboard) + 1)]
         display_leaderboard.insert(0, "Hạng", medals)
         st.dataframe(
-            display_leaderboard.style.highlight_min(subset=["Test RMSE", "Test MAE", "Overfit Gap"], color="#DCFCE7")
-                               .highlight_max(subset=["Test R²"], color="#DCFCE7"),
+            display_leaderboard.style
+                .highlight_min(subset=["Test RMSE", "Test MAE", "Overfit Gap"], color="#ECFDF5")
+                .highlight_max(subset=["Test R²"], color="#ECFDF5")
+                .format({
+                    "Train RMSE": "{:.3f}",
+                    "Test RMSE": "{:.3f}",
+                    "Test MAE": "{:.3f}",
+                    "Test R²": "{:.3f}",
+                    "Train R²": "{:.3f}",
+                    "Overfit Gap": "{:.3f}",
+                    "Thời gian (s)": "{:.2f}"
+                }),
             use_container_width=True,
             hide_index=True
         )
