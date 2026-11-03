@@ -34,41 +34,8 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import plotly.io as pio
 from plotly.subplots import make_subplots
 import streamlit as st
-
-# Cấu hình Pure White Theme chuẩn cho toàn bộ biểu đồ Plotly
-pio.templates.default = "plotly_white"
-if "plotly_white" in pio.templates:
-    pio.templates["plotly_white"].layout.update(
-        paper_bgcolor="#FFFFFF",
-        plot_bgcolor="#FFFFFF",
-        font=dict(family="Inter, -apple-system, sans-serif", color="#0F172A", size=12),
-        xaxis=dict(
-            showgrid=True,
-            gridcolor="#F1F5F9",
-            zerolinecolor="#E2E8F0",
-            linecolor="#CBD5E1",
-            tickfont=dict(color="#475569", size=11),
-            title=dict(font=dict(color="#0F172A", size=12, family="Inter, sans-serif"))
-        ),
-        yaxis=dict(
-            showgrid=True,
-            gridcolor="#F1F5F9",
-            zerolinecolor="#E2E8F0",
-            linecolor="#CBD5E1",
-            tickfont=dict(color="#475569", size=11),
-            title=dict(font=dict(color="#0F172A", size=12, family="Inter, sans-serif"))
-        ),
-        legend=dict(
-            bgcolor="rgba(255, 255, 255, 0.95)",
-            bordercolor="#E2E8F0",
-            borderwidth=1,
-            font=dict(color="#334155", size=11)
-        ),
-        margin=dict(l=24, r=24, t=44, b=24)
-    )
 
 # Scikit-learn
 from sklearn.base import BaseEstimator, RegressorMixin, clone
@@ -845,309 +812,76 @@ def train_and_benchmark_models(
 # ==================================================================================================
 
 def inject_custom_css():
-    """Nhúng Pure White Modern Tech CSS - Giao diện nền trắng tinh tế, sắc nét chuẩn SaaS, tối ưu hóa typography và biểu bảng."""
+    """Nhúng Modern Tech Analytics CSS với tone màu chuyên nghiệp."""
     st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-    /* Global Pure White Theme & Typography */
-    html, body, [class*="css"], .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-        font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11' !important;
-        background-color: #FFFFFF !important;
-        color: #0F172A !important;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
     }
 
-    /* Headings Typography */
-    h1, h2, h3, h4, h5, h6 {
-        font-family: 'Inter', sans-serif !important;
-        color: #0F172A !important;
-        font-weight: 800 !important;
-        letter-spacing: -0.02em !important;
-    }
-    h1 { font-size: 2.15rem !important; line-height: 1.25 !important; }
-    h2 { font-size: 1.65rem !important; line-height: 1.3 !important; margin-top: 1.2rem !important; margin-bottom: 0.8rem !important; }
-    h3 { font-size: 1.35rem !important; line-height: 1.35 !important; margin-top: 1.1rem !important; margin-bottom: 0.6rem !important; }
-    h4 { font-size: 1.15rem !important; line-height: 1.4 !important; margin-top: 0.9rem !important; }
-
-    /* Paragraphs & Text Content */
-    p, li, span {
-        color: #334155 !important;
-        font-size: 14.5px !important;
-        line-height: 1.65 !important;
-    }
-    label {
-        color: #1E293B !important;
-        font-weight: 600 !important;
-        font-size: 13.5px !important;
-    }
-
-    /* LaTeX Math Formula Highlighting */
-    .katex-display {
-        background: #FFFFFF !important;
-        padding: 14px 18px !important;
-        border-radius: 10px !important;
-        border: 1px solid #E2E8F0 !important;
-        margin: 14px 0 !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.02) !important;
-    }
-    .katex {
-        font-size: 1.08em !important;
-        color: #0F172A !important;
-    }
-
-    /* Sidebar Pure White */
-    [data-testid="stSidebar"], [data-testid="stSidebar"] > div:first-child {
-        background-color: #FFFFFF !important;
-        border-right: 1px solid #E2E8F0 !important;
-    }
-    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
-    [data-testid="stSidebar"] span, [data-testid="stSidebar"] label {
-        color: #1E293B !important;
-    }
-
-    /* Container Spacing */
-    .block-container {
-        padding-top: 1.8rem !important;
-        padding-bottom: 3rem !important;
-        max-width: 95% !important;
-        background-color: #FFFFFF !important;
-    }
-
-    /* Modern Streamlit Tabs - Pure White */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        background-color: #FFFFFF !important;
-        padding: 6px;
-        border-radius: 12px;
-        border: 1px solid #E2E8F0 !important;
-        margin-bottom: 20px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-    }
-    .stTabs [data-baseweb="tab"] {
-        height: 44px;
-        white-space: pre-wrap;
-        background-color: #FFFFFF !important;
-        border-radius: 8px;
-        color: #475569 !important;
-        font-weight: 600;
-        font-size: 13.5px;
-        padding: 8px 18px;
-        border: 1px solid transparent !important;
-        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .stTabs [data-baseweb="tab"]:hover {
-        background-color: #F8FAFC !important;
-        color: #0284C7 !important;
-        border-color: #E2E8F0 !important;
-    }
-    .stTabs [aria-selected="true"] {
-        background-color: #FFFFFF !important;
-        color: #0284C7 !important;
-        border: 2px solid #0284C7 !important;
-        font-weight: 700 !important;
-        box-shadow: 0 4px 12px rgba(2, 132, 199, 0.12) !important;
-    }
-
-    /* Header Banner - Pure White Card */
     .main-header {
-        background: #FFFFFF !important;
-        padding: 26px 32px;
+        background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0369A1 100%);
+        padding: 24px 30px;
         border-radius: 16px;
-        color: #0F172A !important;
-        margin-bottom: 22px;
-        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.02) !important;
-        border: 1px solid #E2E8F0 !important;
-        position: relative;
-        overflow: hidden;
-    }
-    .main-header::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #0284C7, #38BDF8, #10B981);
+        color: white;
+        margin-bottom: 24px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
     }
 
-    /* Metric Card - Pure White */
     .metric-card {
-        background: #FFFFFF !important;
-        border: 1px solid #E2E8F0 !important;
-        border-radius: 14px;
-        padding: 18px 20px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        position: relative;
-        overflow: hidden;
+        background: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        border-radius: 12px;
+        padding: 16px 20px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
     }
     .metric-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.03) !important;
-        border-color: #38BDF8 !important;
-    }
-    .metric-card::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #0284C7, #38BDF8);
-    }
-    .metric-icon-box {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 34px;
-        height: 34px;
-        border-radius: 8px;
-        background: #F8FAFC !important;
-        border: 1px solid #E2E8F0 !important;
-        color: #0284C7;
-        font-size: 16px;
-        margin-bottom: 6px;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
     }
     .metric-title {
-        color: #64748B !important;
-        font-size: 0.78rem;
-        font-weight: 700;
+        color: #64748B;
+        font-size: 0.82rem;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.05em;
     }
     .metric-value {
-        color: #0F172A !important;
-        font-size: 1.65rem;
-        font-weight: 800;
+        color: #0F172A;
+        font-size: 1.7rem;
+        font-weight: 700;
         margin-top: 4px;
-        line-height: 1.2;
     }
     .metric-sub {
-        color: #0284C7 !important;
+        color: #0284C7;
         font-size: 0.8rem;
-        font-weight: 600;
-        margin-top: 4px;
+        font-weight: 500;
     }
 
-    /* Badges */
     .badge-tag {
         display: inline-block;
         padding: 4px 10px;
         border-radius: 6px;
         font-size: 0.75rem;
-        font-weight: 700;
+        font-weight: 600;
         margin-right: 6px;
     }
-    .badge-tree { background: #FFFFFF; color: #92400E; border: 1px solid #FCD34D; }
-    .badge-forest { background: #FFFFFF; color: #166534; border: 1px solid #86EFAC; }
-    .badge-boosting { background: #FFFFFF; color: #3730A3; border: 1px solid #A5B4FC; }
-    .badge-nontree { background: #FFFFFF; color: #475569; border: 1px solid #CBD5E1; }
+    .badge-tree { background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; }
+    .badge-forest { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
+    .badge-boosting { background: #E0E7FF; color: #3730A3; border: 1px solid #A5B4FC; }
+    .badge-nontree { background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; }
 
-    /* Formula & Callout Boxes - Pure White */
     .formula-box {
-        background: #FFFFFF !important;
-        border: 1px solid #E2E8F0 !important;
-        border-left: 4px solid #0284C7 !important;
+        background: #F8FAFC;
+        border-left: 4px solid #0284C7;
         padding: 14px 18px;
-        border-radius: 8px;
+        border-radius: 0 8px 8px 0;
         margin: 12px 0;
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.88rem;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        color: #0F172A !important;
-    }
-    .callout-box {
-        background: #FFFFFF !important;
-        border: 1px solid #E2E8F0 !important;
-        border-left: 4px solid #10B981 !important;
-        padding: 14px 18px;
-        border-radius: 8px;
-        margin: 12px 0;
-        font-size: 0.9rem;
-        color: #0F172A !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-    }
-
-    /* Live Pulse Status */
-    .status-pulse {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #10B981;
-        box-shadow: 0 0 0 rgba(16, 185, 129, 0.7);
-        animation: pulseAnimation 1.8s infinite;
-    }
-    @keyframes pulseAnimation {
-        0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-        70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-    }
-
-    /* Streamlit Alert Callouts in Pure White */
-    .stAlert {
-        background-color: #FFFFFF !important;
-        border: 1px solid #E2E8F0 !important;
-        border-radius: 12px !important;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important;
-    }
-    .stAlert p {
-        color: #1E293B !important;
-    }
-
-    /* Tables & Dataframes - Crystal Clear Pure White Styling */
-    [data-testid="stDataFrame"] {
-        border: 1px solid #E2E8F0 !important;
-        border-radius: 12px !important;
-        background-color: #FFFFFF !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
-        overflow: hidden !important;
-        padding: 2px !important;
-    }
-    [data-testid="stDataFrame"] > div {
-        background-color: #FFFFFF !important;
-    }
-    table, table.dataframe {
-        width: 100% !important;
-        border-collapse: separate !important;
-        border-spacing: 0 !important;
-        margin: 14px 0 !important;
-        border: 1px solid #E2E8F0 !important;
-        border-radius: 10px !important;
-        overflow: hidden !important;
-        background-color: #FFFFFF !important;
-        font-family: 'Inter', sans-serif !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.02) !important;
-    }
-    th {
-        background-color: #F8FAFC !important;
-        color: #0F172A !important;
-        font-weight: 700 !important;
-        font-size: 13.5px !important;
-        padding: 12px 14px !important;
-        border-bottom: 2px solid #E2E8F0 !important;
-        text-align: left !important;
-    }
-    td {
-        background-color: #FFFFFF !important;
-        color: #1E293B !important;
-        font-size: 13.5px !important;
-        padding: 11px 14px !important;
-        border-bottom: 1px solid #F1F5F9 !important;
-    }
-    tr:last-child td {
-        border-bottom: none !important;
-    }
-    tr:hover td {
-        background-color: #F8FAFC !important;
-    }
-
-    /* Form & Input controls */
-    div[data-baseweb="select"] > div,
-    input, textarea {
-        background-color: #FFFFFF !important;
-        border-color: #CBD5E1 !important;
-        color: #0F172A !important;
-        font-family: 'Inter', sans-serif !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -1156,11 +890,11 @@ def inject_custom_css():
 def render_project_footer(section_name: str = ""):
     """
     Footer chuẩn hóa của đề tài nghiên cứu khoa học C1 - Nhóm 4 (GDG on Campus HUST - Gen 6).
-    Chèn đồng bộ vào cuối mỗi Tab và từng phân hệ chức năng (Pure White Aesthetic).
+    Chèn đồng bộ vào cuối mỗi Tab và từng phân hệ chức năng.
     """
     sec_tag = f" — Phần: {section_name}" if section_name else ""
     st.markdown(f"""
-    <div style="margin-top: 36px; padding: 22px 24px; background: #FFFFFF; border-radius: 14px; border: 1px solid #E2E8F0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);">
+    <div style="margin-top: 36px; padding: 22px 24px; background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%); border-radius: 14px; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; border-bottom: 1px solid #E2E8F0; padding-bottom: 12px; margin-bottom: 14px;">
             <div>
                 <span style="font-weight: 800; font-size: 15px; color: #0F172A;">🚀 ĐỀ TÀI C1: DECISION TREE VÀ ENSEMBLE TRÊN DỮ LIỆU BẢNG</span>
@@ -1171,19 +905,19 @@ def render_project_footer(section_name: str = ""):
             </div>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; font-size: 13px; color: #334155;">
-            <div style="background: #FFFFFF; padding: 12px 14px; border-radius: 8px; border: 1px solid #E2E8F0; border-left: 3px solid #0284C7; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+            <div style="background: white; padding: 10px 14px; border-radius: 8px; border-left: 3px solid #0284C7;">
                 <b>1. Phan Hoàng Long</b> <span style="color: #64748B;">(Team Lead)</span><br>
                 <small style="color: #64748B;">Nghiên cứu & Hiện thực hóa Decision Tree from Scratch</small>
             </div>
-            <div style="background: #FFFFFF; padding: 12px 14px; border-radius: 8px; border: 1px solid #E2E8F0; border-left: 3px solid #10B981; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+            <div style="background: white; padding: 10px 14px; border-radius: 8px; border-left: 3px solid #10B981;">
                 <b>2. Võ Thảo Nguyên</b><br>
                 <small style="color: #64748B;">Tiền xử lý dữ liệu, Bagging/RF, AdaBoost/GBM, Giải thích SHAP</small>
             </div>
-            <div style="background: #FFFFFF; padding: 12px 14px; border-radius: 8px; border: 1px solid #E2E8F0; border-left: 3px solid #F59E0B; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+            <div style="background: white; padding: 10px 14px; border-radius: 8px; border-left: 3px solid #F59E0B;">
                 <b>3. Võ Xuân Cường</b><br>
                 <small style="color: #64748B;">Hệ GBDT hiện đại (XGB/LGBM/CatBoost), Stress-Test & Web Demo</small>
             </div>
-            <div style="background: #FFFFFF; padding: 12px 14px; border-radius: 8px; border: 1px solid #E2E8F0; border-left: 3px solid #8B5CF6; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+            <div style="background: white; padding: 10px 14px; border-radius: 8px; border-left: 3px solid #8B5CF6;">
                 <b>4. Trần Đại Nghĩa</b><br>
                 <small style="color: #64748B;">Cơ sở lý thuyết toán học, Đối chứng Non-Tree & Tổng hợp Báo cáo</small>
             </div>
@@ -1289,25 +1023,14 @@ def main():
     # ----------------------------------------------------------------------------------------------
     st.markdown("""
     <div class="main-header">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 8px; gap: 8px;">
-            <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: #0284C7; text-transform: uppercase;">
-                🚀 GOOGLE DEVELOPER GROUP ON CAMPUS HUST — DATA & AI GEN 6
-            </span>
-            <span style="display: inline-flex; align-items: center; gap: 6px; background: #ECFDF5; border: 1px solid #A7F3D0; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; color: #065F46;">
-                <span class="status-pulse"></span> HỆ THỐNG THỰC NGHIỆM SẴN SÀNG
-            </span>
+        <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: #38BDF8; margin-bottom: 6px;">
+            GOOGLE DEVELOPER GROUP ON CAMPUS HUST — DATA & AI GEN 6
         </div>
-        <div style="font-size: 26px; font-weight: 800; line-height: 1.3; margin-bottom: 10px; letter-spacing: -0.01em; color: #0F172A;">
+        <div style="font-size: 26px; font-weight: 800; line-height: 1.25; margin-bottom: 8px;">
             C1. DECISION TREE VÀ ENSEMBLE: CƠ SỞ LÝ THUYẾT, THỰC NGHIỆM ĐỐI CHỨNG VÀ GIẢI THÍCH MÔ HÌNH TRÊN DỮ LIỆU BẢNG
         </div>
-        <div style="font-size: 14px; color: #475569; max-width: 980px; line-height: 1.55; margin-bottom: 14px;">
-            Nghiên cứu độc lập & thực nghiệm toàn diện trên 989 tin đăng thuê phòng trọ TP.HCM — Triệt tiêu rò rỉ dữ liệu (Anti-Leakage), giải phẫu CART Regression từ đầu và kiểm định ứng suất 4 chiều.
-        </div>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <span style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; color: #334155; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">📊 989 Tin đăng TP.HCM</span>
-            <span style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; color: #334155; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">⚖️ 12 Mô hình Đối chứng</span>
-            <span style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; color: #334155; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">🔄 5-Fold Cross Validation</span>
-            <span style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; color: #334155; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">🛡️ Zero-Leakage Guaranteed</span>
+        <div style="font-size: 14px; opacity: 0.9;">
+            Nghiên cứu độc lập & thực nghiệm toàn diện trên 989 dữ liệu tin đăng thuê phòng trọ TP.HCM — Giải quyết rò rỉ dữ liệu, chứng minh định lý toán học và kiểm định ứng suất 4 chiều.
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1335,16 +1058,14 @@ def main():
         with col_m1:
             st.markdown(f"""
             <div class="metric-card">
-                <div class="metric-icon-box">📊</div>
                 <div class="metric-title">Tổng số bản ghi</div>
                 <div class="metric-value">{len(df_clean)}</div>
-                <div class="metric-sub">989 tin sau làm sạch</div>
+                <div class="metric-sub">989 tin đăng sau làm sạch</div>
             </div>
             """, unsafe_allow_html=True)
         with col_m2:
             st.markdown(f"""
             <div class="metric-card">
-                <div class="metric-icon-box">🔀</div>
                 <div class="metric-title">Train / Test Split</div>
                 <div class="metric-value">{pipe_info['n_train']} / {pipe_info['n_test']}</div>
                 <div class="metric-sub">Tỷ lệ cố định 80% / 20%</div>
@@ -1353,7 +1074,6 @@ def main():
         with col_m3:
             st.markdown(f"""
             <div class="metric-card">
-                <div class="metric-icon-box">💰</div>
                 <div class="metric-title">Giá Trung vị / TB</div>
                 <div class="metric-value">{df_clean['price_million'].median():.2f} / {df_clean['price_million'].mean():.2f}</div>
                 <div class="metric-sub">Triệu VNĐ/tháng</div>
@@ -1362,7 +1082,6 @@ def main():
         with col_m4:
             st.markdown(f"""
             <div class="metric-card">
-                <div class="metric-icon-box">🛡️</div>
                 <div class="metric-title">Cọc Trung vị (Train)</div>
                 <div class="metric-value">{pipe_info['train_deposit_median']:.2f} tr</div>
                 <div class="metric-sub">Điền khuyết Fold-Aware</div>
@@ -1371,7 +1090,6 @@ def main():
         with col_m5:
             st.markdown(f"""
             <div class="metric-card">
-                <div class="metric-icon-box">🏷️</div>
                 <div class="metric-title">Không gian đặc trưng</div>
                 <div class="metric-value">15 features</div>
                 <div class="metric-sub">Triệt tiêu Target Leakage</div>
@@ -1526,60 +1244,19 @@ def main():
 
         # Bảng thẻ so sánh trực quan
         card1, card2, card3, card4, card5 = st.columns(5)
-        tr_rmse_sc = math.sqrt(mean_squared_error(pipe_info['y_train'], y_pred_scratch_tr))
-        tr_rmse_sk = math.sqrt(mean_squared_error(pipe_info['y_train'], y_pred_sk_tr))
-        te_rmse_sc = math.sqrt(mean_squared_error(pipe_info['y_test'], y_pred_scratch_te))
-        te_rmse_sk = math.sqrt(mean_squared_error(pipe_info['y_test'], y_pred_sk_te))
-        r2_sc = r2_score(pipe_info['y_test'], y_pred_scratch_te)
-        r2_sk = r2_score(pipe_info['y_test'], y_pred_sk_te)
-        leaves_sc = scratch_tree.get_n_leaves()
-        leaves_sk = sk_tree.get_n_leaves()
-
         with card1:
-            st.markdown(f"""
-            <div class="metric-card">
-                <div class="metric-icon-box">🎯</div>
-                <div class="metric-title">Train RMSE</div>
-                <div class="metric-value">{tr_rmse_sc:.3f}</div>
-                <div class="metric-sub">Sklearn: <b>{tr_rmse_sk:.3f}</b> <span class="badge-tag">Khớp 100%</span></div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.metric("Train RMSE (Scratch vs Sklearn)", f"{math.sqrt(mean_squared_error(pipe_info['y_train'], y_pred_scratch_tr)):.3f}",
+                      f"Sklearn: {math.sqrt(mean_squared_error(pipe_info['y_train'], y_pred_sk_tr)):.3f}")
         with card2:
-            st.markdown(f"""
-            <div class="metric-card">
-                <div class="metric-icon-box">🧪</div>
-                <div class="metric-title">Test RMSE</div>
-                <div class="metric-value">{te_rmse_sc:.3f}</div>
-                <div class="metric-sub">Sklearn: <b>{te_rmse_sk:.3f}</b> <span class="badge-tag">Chuẩn xác</span></div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.metric("Test RMSE (Scratch vs Sklearn)", f"{math.sqrt(mean_squared_error(pipe_info['y_test'], y_pred_scratch_te)):.3f}",
+                      f"Sklearn: {math.sqrt(mean_squared_error(pipe_info['y_test'], y_pred_sk_te)):.3f}")
         with card3:
-            st.markdown(f"""
-            <div class="metric-card">
-                <div class="metric-icon-box">📈</div>
-                <div class="metric-title">Test R² (Score)</div>
-                <div class="metric-value">{r2_sc:.3f}</div>
-                <div class="metric-sub">Sklearn: <b>{r2_sk:.3f}</b> <span class="badge-tag">Đồng nhất</span></div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.metric("Test R² (Scratch vs Sklearn)", f"{r2_score(pipe_info['y_test'], y_pred_scratch_te):.3f}",
+                      f"Sklearn: {r2_score(pipe_info['y_test'], y_pred_sk_te):.3f}")
         with card4:
-            st.markdown(f"""
-            <div class="metric-card">
-                <div class="metric-icon-box">🍃</div>
-                <div class="metric-title">Số nút lá</div>
-                <div class="metric-value">{leaves_sc}</div>
-                <div class="metric-sub">Sklearn: <b>{leaves_sk}</b> nút lá</div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.metric("Số nút lá (Leaves)", f"{scratch_tree.get_n_leaves()}", f"Sklearn: {sk_tree.get_n_leaves()}")
         with card5:
-            st.markdown(f"""
-            <div class="metric-card">
-                <div class="metric-icon-box">⚡</div>
-                <div class="metric-title">Thời gian Fit</div>
-                <div class="metric-value">{t_scratch:.1f} <span style="font-size:1rem;font-weight:600;">ms</span></div>
-                <div class="metric-sub">Sklearn (C): <b>{t_sk:.1f} ms</b></div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.metric("Thời gian fit (ms)", f"{t_scratch:.1f} ms", f"Sklearn: {t_sk:.1f} ms")
 
         st.markdown("---")
 
@@ -1652,24 +1329,10 @@ def main():
 
         # Bảng Leaderboard
         st.markdown("#### 🏆 Bảng Xếp hạng Leaderboard Toàn diện")
-        display_leaderboard = leaderboard_df.copy()
-        medals = ["🥇 #1", "🥈 #2", "🥉 #3"] + [f"#{i}" for i in range(4, len(display_leaderboard) + 1)]
-        display_leaderboard.insert(0, "Hạng", medals)
         st.dataframe(
-            display_leaderboard.style
-                .highlight_min(subset=["Test RMSE", "Test MAE", "Overfit Gap"], color="#ECFDF5")
-                .highlight_max(subset=["Test R²"], color="#ECFDF5")
-                .format({
-                    "Train RMSE": "{:.3f}",
-                    "Test RMSE": "{:.3f}",
-                    "Test MAE": "{:.3f}",
-                    "Test R²": "{:.3f}",
-                    "Train R²": "{:.3f}",
-                    "Overfit Gap": "{:.3f}",
-                    "Thời gian (s)": "{:.2f}"
-                }),
-            use_container_width=True,
-            hide_index=True
+            leaderboard_df.style.highlight_min(subset=["Test RMSE", "Test MAE", "Overfit Gap"], color="#DCFCE7")
+                               .highlight_max(subset=["Test R²"], color="#DCFCE7"),
+            use_container_width=True
         )
 
         # Biểu đồ Pareto Frontier
@@ -1830,20 +1493,8 @@ def main():
                 low_sample_results.append({"Mô hình": name, "Test RMSE": round(err, 3)})
 
             df_low = pd.DataFrame(low_sample_results).sort_values("Test RMSE")
-            c_low1, c_low2 = st.columns([1.5, 1])
-            with c_low1:
-                fig_low = px.bar(
-                    df_low, x="Test RMSE", y="Mô hình", orientation="h",
-                    color="Test RMSE", color_continuous_scale="Teal",
-                    title=f"Hiệu năng Test RMSE khi chỉ có N = {sample_size} mẫu huấn luyện",
-                    text=[f"{v:.3f} tr" for v in df_low["Test RMSE"]]
-                )
-                fig_low.update_traces(textposition="outside")
-                fig_low.update_layout(height=280, margin=dict(l=20, r=20, t=40, b=20))
-                st.plotly_chart(fig_low, use_container_width=True)
-            with c_low2:
-                st.dataframe(df_low, use_container_width=True, hide_index=True)
-                st.info("💡 **Kết luận Thực nghiệm**: Khi $N \\le 100$, các mô hình phức tạp tách theo lá (Leaf-wise như LightGBM) dễ bị quá khớp do thiếu dữ liệu để ước lượng phân bố. Ngược lại, **Random Forest** và **Ridge Regression** tỏ ra ổn định và bền bỉ nhất.")
+            st.dataframe(df_low, use_container_width=True)
+            st.caption("Khi $N \\le 100$, các mô hình phức tạp tách theo lá (Leaf-wise như LightGBM) dễ quá khớp hơn Random Forest và Ridge Regression.")
 
         # SUB-TAB 3: CATEGORICAL ENCODING
         with subtab3:
@@ -1859,24 +1510,19 @@ def main():
 
             cat_strat_df = pd.DataFrame({
                 "Chiến lược Mã hóa": [
-                    "🔴 Naïve Target Encoding",
-                    "🟡 One-Hot Encoding",
-                    "🟢 Ordered Target Statistics (CatBoost / OOF Smooth)"
-                ],
-                "Đặc tính Kỹ thuật": [
-                    "Tính trung bình nhãn trực tiếp trên toàn tập Train",
-                    "Tách biến danh mục thành 24 cột nhị phân 0/1",
-                    "Sử dụng thứ tự giả lập thời gian & Smoothing Prior"
+                    "Cách 1: Naïve Target Encoding (Target Leakage)",
+                    "Cách 2: One-Hot Encoding (Không gian loãng 38 chiều)",
+                    "Cách 3: Ordered Target Statistics (CatBoost / OOF Smooth)"
                 ],
                 "Train RMSE": [0.65, 1.25, 1.18],
                 "Test RMSE": [1.68, 1.48, 1.36],
-                "Đánh giá": [
-                    "❌ Rò rỉ nhãn (Target Leakage), Overfitting nặng",
-                    "⚠️ Không gian phình to 38 chiều, loãng dữ liệu",
-                    "✅ Triệt tiêu rò rỉ hoàn hảo, Test RMSE tối ưu"
+                "Nhận định": [
+                    "Quá khớp nặng nề, rò rỉ nhãn",
+                    "Cây khó chọn ngưỡng tách tối ưu",
+                    "Triệt tiêu rò rỉ, tối ưu hóa tốt nhất"
                 ]
             })
-            st.dataframe(cat_strat_df, use_container_width=True, hide_index=True)
+            st.dataframe(cat_strat_df, use_container_width=True)
 
         # SUB-TAB 4: EXTRAPOLATION
         with subtab4:
@@ -1916,7 +1562,6 @@ def main():
                 height=400, margin=dict(l=20, r=20, t=40, b=20)
             )
             st.plotly_chart(fig_extra, use_container_width=True)
-            st.warning("⚠️ **Hạn chế Cốt lõi Cần Lưu Ý Trong Thực Tế**: Cây quyết định và các mô hình Ensemble (Random Forest, XGBoost) phân hoạch không gian thành các siêu hộp $R_m$ và dự đoán giá trị trung bình $c_m$ của mỗi hộp. Do đó, chúng **hoàn toàn bất lực khi ngoại suy (Extrapolation)** với các căn phòng có diện tích vượt ra ngoài biên huấn luyện (> 45 m²). Đối với bài toán cần tính xu hướng ngoại suy liên tục, **Mô hình Hồi quy Tuyến tính (Ridge/Linear)** hoặc **Hybrid Model (Linear + Tree Residual)** là giải pháp tối ưu.")
         render_project_footer("Tab 4 — Phòng Thí nghiệm Ứng suất 4 Chiều (Stress-Test Lab)")
 
     # ==============================================================================================
@@ -2038,24 +1683,12 @@ def main():
         res_c1, res_c2 = st.columns([1.2, 1.8])
         with res_c1:
             st.markdown(f"""
-            <div class="metric-card" style="border-left: 5px solid #10B981; background: linear-gradient(135deg, #FFFFFF 0%, #F0FDF4 100%);">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span class="metric-title">Giá Thuê Khuyến Nghị (Consensus)</span>
-                    <span style="background: #DCFCE7; color: #166534; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 12px;">Ensemble P50</span>
-                </div>
-                <div class="metric-value" style="color: #059669; font-size: 2.2rem;">{consensus_price:.2f} <span style="font-size: 1.1rem; font-weight: 600; color: #475569;">triệu/tháng</span></div>
-                <div style="margin-top: 14px; padding: 10px 12px; background: rgba(255,255,255,0.85); border-radius: 8px; border: 1px solid #BBF7D0;">
-                    <div style="display: flex; justify-content: space-between; font-size: 12px; color: #64748B; font-weight: 600;">
-                        <span>P5: {p5:.2f} tr</span>
-                        <span style="color: #059669;">Trung vị: {consensus_price:.2f} tr</span>
-                        <span>P95: {p95:.2f} tr</span>
-                    </div>
-                    <div style="height: 6px; width: 100%; background: #E2E8F0; border-radius: 3px; margin-top: 6px; overflow: hidden; position: relative;">
-                        <div style="height: 100%; width: 100%; background: linear-gradient(90deg, #38BDF8 0%, #10B981 50%, #F59E0B 100%); border-radius: 3px;"></div>
-                    </div>
-                    <div style="text-align: center; font-size: 11px; color: #64748B; margin-top: 4px;">
-                        Khoảng tin cậy 90% từ phân phối 200 cây Random Forest
-                    </div>
+            <div class="metric-card" style="border-left: 5px solid #10B981;">
+                <div class="metric-title">Giá Thuê Khuyến Nghị (Ensemble Consensus)</div>
+                <div class="metric-value" style="color: #059669;">{consensus_price:.2f} triệu VNĐ/tháng</div>
+                <div class="metric-sub" style="font-size: 0.9rem; color: #475569; margin-top: 6px;">
+                    <b>Khoảng tin cậy 90% (P5 - P95):</b><br>
+                    [{p5:.2f} triệu — {p95:.2f} triệu VNĐ]
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -2191,50 +1824,18 @@ def main():
         st.markdown("### 📋 Ma trận Khuyến nghị Thực tế (Model Decision Matrix)")
         rec_df = pd.DataFrame({
             "Mô hình": [
-                "🌿 Single Decision Tree",
-                "🌲 Random Forest (Toàn diện #1)",
-                "✨ Extra Trees",
-                "⚡ LightGBM (Tốc độ đỉnh cao)",
-                "🏆 CatBoost (Chính xác cao nhất)",
-                "🚀 XGBoost (Chuẩn mực thi đấu)",
-                "📐 Ridge Regression (Baseline)"
+                "Single Decision Tree",
+                "Random Forest",
+                "Extra Trees",
+                "LightGBM",
+                "CatBoost",
+                "XGBoost",
+                "Ridge / Linear"
             ],
-            "Độ chính xác (Test)": [
-                "⭐⭐ (RMSE: ~1.46)",
-                "⭐⭐⭐⭐⭐ (RMSE: 1.341)",
-                "⭐⭐⭐⭐ (RMSE: 1.365)",
-                "⭐⭐⭐⭐ (RMSE: 1.362)",
-                "⭐⭐⭐⭐⭐ (RMSE: 1.347)",
-                "⭐⭐⭐⭐ (RMSE: 1.355)",
-                "⭐⭐⭐ (RMSE: 1.412)"
-            ],
-            "Khả năng Kháng nhiễu": [
-                "❌ Kém (Dễ gãy nhánh)",
-                "🛡️ Cực tốt (Lấy mẫu kép)",
-                "🛡️ Rất tốt (Cắt ngẫu nhiên)",
-                "⚠️ Trung bình",
-                "🛡️ Cực tốt (Ordered TS)",
-                "🛡️ Tốt (Chính quy hóa L2)",
-                "🛡️ Tốt (Phạt L2 co cụm)"
-            ],
-            "Tốc độ Train": [
-                "⚡ Tức thì (<0.05s)",
-                "⚙️ Trung bình (Song song)",
-                "⚡ Rất nhanh",
-                "🚀 Siêu nhanh (EFB/GOSS)",
-                "⚙️ Vừa phải (CPU)",
-                "⚡ Nhanh",
-                "⚡ Tức thì (<0.01s)"
-            ],
-            "Khả năng Ngoại suy": [
-                "⛔ Flatline (Chặn ngang)",
-                "⛔ Flatline (Chặn ngang)",
-                "⛔ Flatline (Chặn ngang)",
-                "⛔ Flatline (Chặn ngang)",
-                "⛔ Flatline (Chặn ngang)",
-                "⛔ Flatline (Chặn ngang)",
-                "📈 Ngoại suy Tuyến tính"
-            ],
+            "Độ chính xác": ["Thấp - Trung bình", "Rất cao", "Cao", "Rất cao", "Xuất sắc nhất", "Rất cao", "Trung bình"],
+            "Khả năng Kháng nhiễu": ["Kém", "Cực tốt", "Rất tốt", "Trung bình", "Cực tốt (Ordered)", "Tốt (L1/L2)", "Tốt"],
+            "Tốc độ Train": ["Tức thì (<0.05s)", "Trung bình (Song song)", "Rất nhanh", "Siêu nhanh (EFB/GOSS)", "Vừa phải", "Nhanh", "Tức thì"],
+            "Khả năng Ngoại suy": ["Chặn ngang (Flatline)", "Chặn ngang (Flatline)", "Chặn ngang", "Chặn ngang", "Chặn ngang", "Chặn ngang", "Ngoại suy tuyến tính"],
             "Khi nào nên ứng dụng": [
                 "Cần giải thích luật if-else trực quan cho con người hoặc hệ thống quy tắc cứng.",
                 "Dữ liệu bảng vừa phải, cần độ ổn định tuyệt đối và không muốn tốn công tinh chỉnh tham số.",
