@@ -38,7 +38,7 @@ from plotly.subplots import make_subplots
 import streamlit as st
 
 # Scikit-learn
-from sklearn.base import BaseEstimator, RegressorMixin
+from sklearn.base import BaseEstimator, RegressorMixin, clone
 from sklearn.exceptions import NotFittedError
 from sklearn.ensemble import (
     AdaBoostRegressor,
@@ -728,6 +728,21 @@ def train_and_benchmark_models(
     results_list = []
     trained_models = {}
 
+    def _safe_clone(m):
+        if isinstance(m, ScratchDecisionTreeRegressor):
+            return ScratchDecisionTreeRegressor(
+                max_depth=m.max_depth,
+                min_samples_split=m.min_samples_split,
+                min_samples_leaf=m.min_samples_leaf,
+                ccp_alpha=m.ccp_alpha,
+                feature_names=m.feature_names,
+            )
+        try:
+            return clone(m)
+        except Exception:
+            import copy
+            return copy.deepcopy(m)
+
     for name, model in models.items():
         t0 = time.perf_counter()
 
@@ -736,7 +751,7 @@ def train_and_benchmark_models(
         for tr_idx, val_idx in _cv_splits:
             X_tr, y_tr = _X_train[tr_idx], _y_train[tr_idx]
             X_va, y_va = _X_train[val_idx], _y_train[val_idx]
-            m_clone = type(model)(**model.get_params()) if hasattr(model, "get_params") else model
+            m_clone = _safe_clone(model)
             m_clone.fit(X_tr, y_tr)
             pred_va = m_clone.predict(X_va)
             cv_rmses.append(math.sqrt(mean_squared_error(y_va, pred_va)))
